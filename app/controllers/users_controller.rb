@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-  
   def register
     @user = User.create(user_params)
     if @user.valid?
-      token = encode_token({ user_id: @user.id })
+      token = encode_token({ user_id: @user.id }, Time.now.to_i + 120)
       render json: { user: @user, token: token }, status: :ok
     else
       render json: { error: @user.errors }, status: :unprocessable_entity
@@ -17,7 +16,7 @@ class UsersController < ApplicationController
     # same as @user && authenticate(user_params_login[:password])
     if @user&.authenticate(user_params_login[:password])
       # Create a token if password is correct
-      token = encode_token({ user_id: @user.id })
+      token = encode_token({ user_id: @user.id }, Time.now.to_i + 120)
       render json: { user: @user, token: token }, status: :ok
     else
       render json: { error: 'Username Or Password is incorrect' }, status: :unprocessable_entity
