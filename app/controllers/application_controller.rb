@@ -10,6 +10,8 @@ class ApplicationController < ActionController::API
     # Autherization : Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTIzIn0.AOXUao_6a_LbIcwkaZU574fPqvW6mPvHhwKC7Fatuws
     auth_header = request.headers['Authorization']
     # extract the token
+    return unless auth_header
+
     token = auth_header.split(' ')[1]
     begin
       JWT.decode(token, 'secret', true, algorithm: 'HS256')
@@ -31,6 +33,6 @@ class ApplicationController < ActionController::API
   # This method will try authroize the user present in toke
   # If token is valid it will save the user in `@user` else render an error message
   def authorize
-    render json: { message: 'You have to log in.' }, status: :unauthroized unless authorized_user
+    render json: { message: 'You have to log in.' }, status: :unauthorized unless authorized_user
   end
 end
