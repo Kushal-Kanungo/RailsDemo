@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.valid?
       token = encode_token({ user_id: @user.id }, Time.now.to_i + 120)
-      render json: @user, status: :ok
+      render json: @user, token: token, status: :created
     else
       render json: { error: @user.errors }, status: :unprocessable_entity
     end
