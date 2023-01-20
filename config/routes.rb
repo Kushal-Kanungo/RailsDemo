@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :books
-  resource :users, only: [:create] do
+  resource :users, only: %i[create show index] do
     member do
       post :register
       post :login

@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def show
+    @users = User.all
+  end
+
   def register
     @user = User.create(user_params)
     if @user.valid?

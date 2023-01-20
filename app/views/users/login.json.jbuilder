@@ -1,10 +1,8 @@
+json.extract! @user, :fullname, :company, :email
+
 json.data do
   json.user do
-    json.call(
-      @user,
-      :id,
-      :username
-    )
+    json.set @user.username
   end
   json.token @token
 end
