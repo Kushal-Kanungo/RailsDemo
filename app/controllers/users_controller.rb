@@ -16,8 +16,8 @@ class UsersController < ApplicationController
     # same as @user && authenticate(user_params_login[:password])
     if @user&.authenticate(user_params_login[:password])
       # Create a token if password is correct
-      token = encode_token({ user_id: @user.id }, Time.now.to_i + 120)
-      render json: { user: @user, token: token }, status: :ok
+      @token = encode_token({ user_id: @user.id }, Time.now.to_i + 120)
+      # render json: :user, status: :ok
     else
       render json: { error: 'Username Or Password is incorrect' }, status: :unprocessable_entity
     end
