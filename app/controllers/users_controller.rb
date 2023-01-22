@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   def register
     @user = User.create(user_params)
     if @user.valid?
+      CrudNotificationMailer.create_notification(@user).deliver_now
       token = encode_token({ user_id: @user.id }, Time.now.to_i + 120)
       render json: { user: @user, token: token }, status: :ok
     else
