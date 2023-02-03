@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def login
+    sleep 2
     @user = User.find_by(username: user_params_login[:username])
 
     # authenticate method from bycrpt
