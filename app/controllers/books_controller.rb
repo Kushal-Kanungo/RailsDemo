@@ -5,8 +5,8 @@ class BooksController < ApplicationController
   # GET /books
   def index
     # @books = @user.books.all
-    sleep 2
-    @books = Book.all
+    sleep 1.5
+    @books = Book.all.page(params[:page]).per(24)
     render json: @books
   end
 
