@@ -5,7 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-user = User.find(11)
+User.create(username: 'Kushal', password: '1234', password_confirmation: '1234')
+
+user = User.find(1)
 (1...1000).each do |i|
   book = Book.create(title: "Book NO#{i * 12_345}")
   user.books << book
