@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     get 'page/:page', action: :index, on: :collection
   end
 
+  post 'api/upload', to: 'uploads#upload'
+
   resource :users, only: [:create] do
     member do
       post :register
